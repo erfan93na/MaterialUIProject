@@ -1,14 +1,14 @@
 import { Redirect, Route } from "react-router-dom";
 
-const PrevRoute = (props) => {
-    console.log("ho")
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-console.log(isLoggedIn)
+const PrivateRoute = (props) => {
+    console.log(props)
+  const isLoggedIn = +localStorage.getItem("isLoggedIn");
+console.log(typeof isLoggedIn)
   const Component = props.component;
-  return <Route>
-      {isLoggedIn?<Component/>:<Redirect to="/login"/>}
+  return <Route  path={props.path}>
+      {isLoggedIn?<Component/>:<Redirect to="/"/>}
   </Route>
   
 };
 
-export default PrevRoute;
+export default PrivateRoute;

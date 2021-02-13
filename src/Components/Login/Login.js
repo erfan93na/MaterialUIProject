@@ -11,10 +11,10 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 const allowedUsers = JSON.parse(localStorage.getItem("allowedUsers"));
-
+const isLoggedIn=+JSON.parse(localStorage.getItem("isLoggedIn"));
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,13 +76,14 @@ else {
          if (allowedUsers[foundUserIndex].password!==password) {setPasswordError([true,"رمز وارد شده درست نیست"])}
          else {localStorage.setItem('isLoggedIn',"1")
              history.push("/explore")}
+
      }
 }
 
 
 
 }
-  return (
+  return ( isLoggedIn?<Redirect to="/explore"/>:
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>

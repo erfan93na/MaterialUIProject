@@ -10,7 +10,7 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  Container,
+  Container,Menu,MenuItem
 } from "@material-ui/core";
 import { PinDrop, Search } from "@material-ui/icons";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
@@ -18,9 +18,13 @@ import StarRateIcon from "@material-ui/icons/StarRate";
 import Map from "../Map/Map";
 import { data } from "../../data";
 import { useState } from "react";
+import {useHistory,useRouteMatch,NavLink} from "react-router-dom"
+import CustomizedCard from "./CustomizedCard/CustomizedCard";
+import BreadCrumbs from "./BreadCrumbs/BreadCrumbs"
 const useStyles = makeStyles((theme) => ({
   AppBar: {
-    justifyContent: "space-between",color:"white"
+    justifyContent: "space-between",
+    color: "white",
   },
   SecondBar: {
     justifyContent: "space-between",
@@ -36,18 +40,51 @@ const useStyles = makeStyles((theme) => ({
     left: "0",
     top: "0",
   },
+  UserMenu:{
+    top:"60px !important"
+  }
 }));
 const Explore = () => {
+ 
   const classes = useStyles();
   const [searchState, setSearchState] = useState("");
   const [isMapShowing, setMapShow] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const history = useHistory()
+const handleSwitchToggle=()=>{
+  history.push(isMapShowing?"/explore/off":"/explore/on")
+  setMapShow((prevState) => !prevState)
+}
+const handleClick = (event) => {
+  setAnchorEl(event.currentTarget);
+};
+
+const handleClose = () => {
+  setAnchorEl(null);
+};
+const handleSignOut=()=>{
+  handleClose();
+  localStorage.setItem("isLoggedIn","0")
+  history.push("/explore")
+}
 
   return (
     <div>
-    
       <AppBar position="static">
         <Toolbar classes={{ root: classes.AppBar }}>
-          <Button endIcon={<ArrowDropDownIcon />}>عرفان نقاش لو</Button>
+          <Button aria-controls="usermenu" aria-haspopup="true" onClick={handleClick} endIcon={<ArrowDropDownIcon />}>عرفان نقاش لو</Button>
+          <Menu
+        id="usermenu"
+        classes={{paper:classes.UserMenu}}
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleClose}>پروفایل</MenuItem>
+        <MenuItem onClick={handleSignOut}>خروج</MenuItem>
+      </Menu>
           <InputBase
             endAdornment={<Search />}
             value={searchState}
@@ -60,56 +97,25 @@ const Explore = () => {
       <Grid container classes={{ root: classes.SecondBar }}>
         <Grid item>
           <Switch
-          checked={isMapShowing}
-          onChange={()=>setMapShow((prevState)=>!prevState)}
+            checked={isMapShowing}
+            onChange={handleSwitchToggle}
           />
         </Grid>
-        <Grid item>BreadCrumbs</Grid>
+        <Grid item><BreadCrumbs/></Grid>
       </Grid>
       <Grid container spacing={1} xs={12}>
-        <Grid item container spacing={3} xs={isMapShowing?8:12}>
+        <Grid item container spacing={3} xs={isMapShowing ? 8 : 12}>
           {data
             .filter((item) => item.name.includes(searchState))
             .map((gym, index) => {
-              return (
-                <Grid xs={isMapShowing?12:3} item>
-                  <Card classes={{ root: classes.Card }}>
-                    <CardMedia
-                      component="img"
-                      alt={gym.name}
-                      height="300"
-                      image={gym.img}
-                      title={gym.name}
-                    />
-                    <CardContent>
-                      <Typography variant="h6" gutterBottom>
-                        {gym.name}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        پذیرش {gym.gender}
-                      </Typography>
-                    </CardContent>
-                    <Grid container justify="space-between">
-                      <Grid item xs={5} justify="center" container>
-                        <StarRateIcon />
-                        <StarRateIcon />
-                        <StarRateIcon />
-                        <StarRateIcon />
-                        <StarRateIcon />
-                      </Grid>
-                      <Grid xs={3} item container justify="center">
-                        <Typography>{gym.district}</Typography>
-                        <PinDrop />
-                      </Grid>
-                    </Grid>
-                  </Card>
-                </Grid>
-              );
+              return <CustomizedCard gym={gym} isMapShowing={isMapShowing} />;
             })}
         </Grid>
-        {isMapShowing?<Grid item xs={4} classes={{ root: classes.Map }}>
-          <Map />
-        </Grid>:null}
+        {isMapShowing ? (
+          <Grid item xs={4} classes={{ root: classes.Map }}>
+            <Map />
+          </Grid>
+        ) : null}
       </Grid>
     </div>
   );
