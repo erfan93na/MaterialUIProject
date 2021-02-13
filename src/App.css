@@ -11,3 +11,7 @@
   font-weight: bold;
   src:url("../src/fonts/Shabnam-Bold.ttf") format("truetype")
 }
+
+a {
+  text-decoration:none;
+}

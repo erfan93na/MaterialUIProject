@@ -13,7 +13,7 @@ const App = () => {
         <Route exact path="/">
         <Login />
           </Route>
-          <PrivateRoute path="/explore" component={Explore} />
+          <PrivateRoute path="/explore/" component={Explore} />
           
         </Switch>
       </Router>

@@ -23,9 +23,9 @@ const useStyles = makeStyles((theme) => ({
   CardMapShowing: {
     padding: theme.spacing(2),
   },
-  RateContainer:{
-    flexWrap:"nowrap"
-  }
+  RateContainer: {
+    flexWrap: "nowrap",
+  },
 }));
 const CustomizedCard = (props) => {
   const classes = useStyles();
@@ -33,7 +33,7 @@ const CustomizedCard = (props) => {
   const { gym, isMapShowing } = props;
   if (!isMapShowing) {
     return (
-      <Grid xs={3} item >
+      <Grid xs={12} md={6} lg={4}item>
         <Card elevation={3}>
           <CardMedia
             component="img"
@@ -42,14 +42,14 @@ const CustomizedCard = (props) => {
             image={gym.img}
             title={gym.name}
           />
-          <CardContent >
+          <CardContent>
             <Typography variant="h6" gutterBottom>
               {gym.name}
             </Typography>
             <Typography variant="subtitle1">پذیرش {gym.gender}</Typography>
           </CardContent>
-         <Box  p={2} display="flex"  justifyContent="space-between">
-            <Box display="flex" justifyContent="flex-start" flexWrap="nowrap"  >
+          <Box p={2} display="flex" justifyContent="space-between">
+            <Box display="flex" justifyContent="flex-start" flexWrap="nowrap">
               <StarRateIcon />
               <StarRateIcon />
               <StarRateIcon />
@@ -66,40 +66,48 @@ const CustomizedCard = (props) => {
     );
   } else {
     return (
-      <Grid xs={12} item container >
-        <Box  boxShadow={3}  display="flex">
-        <Grid item xs={3}>
-          {" "}
-          <CardMedia
-            component="img"
-            alt={gym.name}
-            height="200"
-            image={gym.img}
-            title={gym.name}
-          />
-        </Grid>
-        <Grid item container xs={9} justify="space-between" >
-          <Box width="100%" p={3} display="flex" justifyContent="space-between" >
-            <Box display="flex" flexDirection="column" justifyContent="space-between">
-            <Typography variant="h6" gutterBottom>
-              {gym.name}
-            </Typography>
-            <Typography variant="subtitle1">پذیرش {gym.gender}</Typography>
-            <Box item justify="center">
-              <StarRateIcon />
-              <StarRateIcon />
-              <StarRateIcon />
-              <StarRateIcon />
-              <StarRateIcon />
-            </Box></Box>
-          <Box item justify="center">
-            <Typography>{gym.district}</Typography>
-            <PinDrop />
-          </Box>
-          </Box>
-
-        </Grid>
-
+      <Grid xs={12} item container>
+        <Box boxShadow={3} width={"100%"} display="flex">
+          <Grid item xs={3}>
+            {" "}
+            <CardMedia
+              component="img"
+              alt={gym.name}
+              height="200"
+              image={gym.img}
+              title={gym.name}
+            />
+          </Grid>
+          <Grid item container xs={9} justify="space-between">
+            <Box
+              width="100%"
+              p={3}
+              display="flex"
+              justifyContent="space-between"
+            >
+              <Box
+                display="flex"
+                flexDirection="column"
+                justifyContent="space-between"
+              >
+                <Typography variant="h6" gutterBottom>
+                  {gym.name}
+                </Typography>
+                <Typography variant="subtitle1">پذیرش {gym.gender}</Typography>
+                <Box display="flex" justifyContent="center" flexWrap="nowrap">
+                  <StarRateIcon />
+                  <StarRateIcon />
+                  <StarRateIcon />
+                  <StarRateIcon />
+                  <StarRateIcon />
+                </Box>
+              </Box>
+              <Box item justify="center">
+                <Typography>{gym.district}</Typography>
+                <PinDrop />
+              </Box>
+            </Box>
+          </Grid>
         </Box>
       </Grid>
     );

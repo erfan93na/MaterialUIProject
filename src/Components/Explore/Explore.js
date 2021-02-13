@@ -8,7 +8,7 @@ import {
   Switch,
   Box,
   Menu,
-  MenuItem,
+  MenuItem,FormControlLabel
 } from "@material-ui/core";
 import { PinDrop, Search } from "@material-ui/icons";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
@@ -16,13 +16,17 @@ import StarRateIcon from "@material-ui/icons/StarRate";
 import Map from "../Map/Map";
 import { data } from "../../data";
 import { useState } from "react";
-import { useHistory, useRouteMatch, NavLink } from "react-router-dom";
+import { useHistory, useRouteMatch, NavLink, Redirect, useLocation } from "react-router-dom";
 import CustomizedCard from "./CustomizedCard/CustomizedCard";
 import BreadCrumbs from "./BreadCrumbs/BreadCrumbs";
+import { useEffect } from "react";
 const useStyles = makeStyles((theme) => ({
-  AppBar: {
-    justifyContent: "space-between",
+  AppBarBox: {
+
     color: "white",
+    "& *": {
+      color: "white",
+    },
   },
   SecondBar: {
     justifyContent: "space-between",
@@ -37,17 +41,25 @@ const useStyles = makeStyles((theme) => ({
     position: "sticky",
     left: "0",
     top: "0",
+    "@media (max-width:960px)":{
+        position:"static",
+        height:"300px",
+        margin:"10px",
+        order:"-1"
+    }
   },
   UserMenu: {
     top: "60px !important",
   },
 }));
 const Explore = () => {
+    const isLoggedIn=+localStorage.getItem("isLoggedIn")
+    const location=useLocation()
+
   const classes = useStyles();
   const [searchState, setSearchState] = useState("");
-  const [isMapShowing, setMapShow] = useState(false);
+  const [isMapShowing, setMapShow] = useState(location.pathname.includes("/explore/on")?true:false);
   const [anchorEl, setAnchorEl] = useState(null);
-
   const history = useHistory();
   const handleSwitchToggle = () => {
     history.push(isMapShowing ? "/explore/off" : "/explore/on");
@@ -61,16 +73,17 @@ const Explore = () => {
     setAnchorEl(null);
   };
   const handleSignOut = () => {
-    handleClose();
     localStorage.setItem("isLoggedIn", "0");
-    history.push("/explore");
-  };
-
-  return (
+    history.push("/explore")
+   };
+useEffect(()=>{
+    return ()=>{}
+},[])
+  return (!isLoggedIn?<Redirect to="/explore"/>:
     <div>
       <AppBar position="static">
-        <Toolbar classes={{ root: classes.AppBar }}>
-          <Button
+        <Toolbar>
+            <Box classes={{root:classes.AppBarBox}}  display="flex" justifyContent="space-between" width={1} flexWrap="wrap" p={1}> <Button
             aria-controls="usermenu"
             aria-haspopup="true"
             onClick={handleClick}
@@ -89,25 +102,51 @@ const Explore = () => {
             <MenuItem onClick={handleClose}>پروفایل</MenuItem>
             <MenuItem onClick={handleSignOut}>خروج</MenuItem>
           </Menu>
-          <InputBase
-            endAdornment={<Search />}
-            value={searchState}
-            onChange={(e) => setSearchState(e.target.value)}
-            placeholder="جستجو..."
-            inputProps={{ "aria-label": "search" }}
-          />
+          <Box
+            bgcolor="primary.light"
+            py={1}
+            px={2}
+            borderRadius="borderRadius"
+          >
+            {" "}
+            <InputBase
+              endAdornment={<Search />}
+              value={searchState}
+              onChange={(e) => setSearchState(e.target.value)}
+              placeholder="جستجو..."
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Box></Box>
+         
         </Toolbar>
       </AppBar>
-      <Grid container classes={{ root: classes.SecondBar }}>
-        <Grid item>
-          <Switch checked={isMapShowing} onChange={handleSwitchToggle} />
-        </Grid>
+      <Box
+        bgcolor={"primary.light"}
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        flexWrap="wrap"
+        p={3}
+        mb={4}
+        boxShadow={3}
+      >
+        <FormControlLabel
+          control={
+            <Switch
+              color="primary"
+              checked={isMapShowing}
+              onChange={handleSwitchToggle}
+            />
+          }
+          label="نمایش نقشه"
+        />
+
         <Grid item>
           <BreadCrumbs />
         </Grid>
-      </Grid>
-      <Grid container justify="center" >
-        <Grid item container spacing={3} xs={isMapShowing ? 8 : 12}>
+      </Box>
+      <Grid container justify="center">
+        <Grid item container spacing={3} xs={12} md={isMapShowing ? 8 : 10}>
           {data
             .filter((item) => item.name.includes(searchState))
             .map((gym, index) => {
@@ -115,7 +154,7 @@ const Explore = () => {
             })}
         </Grid>
         {isMapShowing ? (
-          <Grid item xs={4} classes={{ root: classes.Map }}>
+          <Grid item xs={12} md={4} classes={{ root: classes.Map }}>
             <Map />
           </Grid>
         ) : null}
