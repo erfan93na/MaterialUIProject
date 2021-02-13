@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { Redirect, useHistory } from "react-router-dom";
+import Background from "../../images/loginbg.jpg"
 
 const allowedUsers = JSON.parse(localStorage.getItem("allowedUsers"));
 const isLoggedIn=+JSON.parse(localStorage.getItem("isLoggedIn"));
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   image: {
-    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundImage: `url(${Background})`,
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
