@@ -6,3 +6,5 @@ export const theme=createMuiTheme({
         fontFamily:'Shabnam,sans-serif'
     },
 })
+
+console.log(theme)

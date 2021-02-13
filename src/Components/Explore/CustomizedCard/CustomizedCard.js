@@ -5,14 +5,14 @@ import {
   InputBase,
   makeStyles,
   Grid,
-  Switch,
+  Box,
   Card,
   CardMedia,
   CardContent,
   Typography,
   Container,
 } from "@material-ui/core";
-import { PinDrop, Search } from "@material-ui/icons";
+import { AddBox, PinDrop, Search } from "@material-ui/icons";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import StarRateIcon from "@material-ui/icons/StarRate";
 import { useState } from "react";
@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
   CardMapShowing: {
     padding: theme.spacing(2),
   },
+  RateContainer:{
+    flexWrap:"nowrap"
+  }
 }));
 const CustomizedCard = (props) => {
   const classes = useStyles();
@@ -30,8 +33,8 @@ const CustomizedCard = (props) => {
   const { gym, isMapShowing } = props;
   if (!isMapShowing) {
     return (
-      <Grid xs={3} item>
-        <Card >
+      <Grid xs={3} item >
+        <Card elevation={3}>
           <CardMedia
             component="img"
             alt={gym.name}
@@ -45,25 +48,26 @@ const CustomizedCard = (props) => {
             </Typography>
             <Typography variant="subtitle1">پذیرش {gym.gender}</Typography>
           </CardContent>
-          <Grid container justify="space-between" classes={{root:classes.CardMapNotShowing}}>
-            <Grid item xs={5} justify="center" container>
+         <Box  p={2} display="flex"  justifyContent="space-between">
+            <Box display="flex" justifyContent="flex-start" flexWrap="nowrap"  >
               <StarRateIcon />
               <StarRateIcon />
               <StarRateIcon />
               <StarRateIcon />
               <StarRateIcon />
-            </Grid>
-            <Grid xs={3} item container justify="center">
+            </Box>
+            <Box display="flex" justifyContent="flex-end">
               <Typography>{gym.district}</Typography>
               <PinDrop />
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Card>
       </Grid>
     );
   } else {
     return (
       <Grid xs={12} item container >
+        <Box  boxShadow={3}  display="flex">
         <Grid item xs={3}>
           {" "}
           <CardMedia
@@ -74,25 +78,29 @@ const CustomizedCard = (props) => {
             title={gym.name}
           />
         </Grid>
-        <Grid item container xs={9} justify="space-between" classes={{root:classes.CardMapShowing}}>
-          <Grid item>
+        <Grid item container xs={9} justify="space-between" >
+          <Box width="100%" p={3} display="flex" justifyContent="space-between" >
+            <Box display="flex" flexDirection="column" justifyContent="space-between">
             <Typography variant="h6" gutterBottom>
               {gym.name}
             </Typography>
             <Typography variant="subtitle1">پذیرش {gym.gender}</Typography>
-            <Grid item justify="center">
+            <Box item justify="center">
               <StarRateIcon />
               <StarRateIcon />
               <StarRateIcon />
               <StarRateIcon />
               <StarRateIcon />
-            </Grid>
-          </Grid>
-          <Grid item justify="center">
+            </Box></Box>
+          <Box item justify="center">
             <Typography>{gym.district}</Typography>
             <PinDrop />
-          </Grid>
+          </Box>
+          </Box>
+
         </Grid>
+
+        </Box>
       </Grid>
     );
   }
