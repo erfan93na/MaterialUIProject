@@ -7,13 +7,13 @@ import {
   CardContent,
   Typography,
 } from "@material-ui/core";
-import {  PinDrop } from "@material-ui/icons";
-import StarRateIcon from "@material-ui/icons/StarRate";
+import { PinDrop, StarRate } from "@material-ui/icons";
+
 const useStyles = makeStyles((theme) => ({
-  root:{
-    "&:hover":{
-      boxShadow:theme.shadows[15]
-    }
+  root: {
+    "&:hover": {
+      boxShadow: theme.shadows[15],
+    },
   },
   CardMapNotShowing: {
     paddingBottom: theme.spacing(2),
@@ -31,8 +31,8 @@ const CustomizedCard = (props) => {
   const { gym, isMapShowing } = props;
   if (!isMapShowing) {
     return (
-      <Grid xs={12} md={6} lg={4}item >
-        <Card elevation={3}  classes={{root:classes.root}}>
+      <Grid xs={12} md={6} lg={4} item>
+        <Card elevation={3} classes={{ root: classes.root }}>
           <CardMedia
             component="img"
             alt={gym.name}
@@ -48,11 +48,11 @@ const CustomizedCard = (props) => {
           </CardContent>
           <Box p={2} display="flex" justifyContent="space-between">
             <Box display="flex" justifyContent="flex-start" flexWrap="nowrap">
-              <StarRateIcon />
-              <StarRateIcon />
-              <StarRateIcon />
-              <StarRateIcon />
-              <StarRateIcon />
+              <StarRate />
+              <StarRate />
+              <StarRate />
+              <StarRate />
+              <StarRate />
             </Box>
             <Box display="flex" justifyContent="flex-end">
               <Typography>{gym.district}</Typography>
@@ -65,7 +65,12 @@ const CustomizedCard = (props) => {
   } else {
     return (
       <Grid xs={12} item container>
-        <Box boxShadow={3} width={"100%"} display="flex"  classes={{root:classes.root}}>
+        <Box
+          boxShadow={3}
+          width={"100%"}
+          display="flex"
+          classes={{ root: classes.root }}
+        >
           <Grid item xs={3}>
             {" "}
             <CardMedia
@@ -93,14 +98,14 @@ const CustomizedCard = (props) => {
                 </Typography>
                 <Typography variant="subtitle1">پذیرش {gym.gender}</Typography>
                 <Box display="flex" justifyContent="center" flexWrap="nowrap">
-                  <StarRateIcon />
-                  <StarRateIcon />
-                  <StarRateIcon />
-                  <StarRateIcon />
-                  <StarRateIcon />
+                  <StarRate />
+                  <StarRate />
+                  <StarRate />
+                  <StarRate />
+                  <StarRate />
                 </Box>
               </Box>
-              <Box  justify="center">
+              <Box justify="center">
                 <Typography>{gym.district}</Typography>
                 <PinDrop />
               </Box>

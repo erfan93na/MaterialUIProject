@@ -15,7 +15,6 @@ import { Redirect, useHistory } from "react-router-dom";
 import Background from "../../images/loginbg.jpg"
 
 const allowedUsers = JSON.parse(localStorage.getItem("allowedUsers"));
-const isLoggedIn=+JSON.parse(localStorage.getItem("isLoggedIn"));
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,6 +51,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login() {
+  const isLoggedIn=+JSON.parse(localStorage.getItem("isLoggedIn"));
+
 const history=useHistory()
   const classes = useStyles();
   const [usernameState,setUserNameState]=useState("")

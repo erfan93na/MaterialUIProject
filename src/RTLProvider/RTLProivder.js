@@ -3,7 +3,7 @@ import { create } from 'jss';
 import rtl from 'jss-rtl';
 import { jssPreset } from '@material-ui/core/styles';
 import { StylesProvider } from '@material-ui/core/styles';
-import { CssBaseline, ThemeProvider } from "@material-ui/core"
+import {  ThemeProvider } from "@material-ui/core"
 
 
 // Configure JSS
