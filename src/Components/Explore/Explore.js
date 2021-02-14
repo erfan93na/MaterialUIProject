@@ -18,6 +18,7 @@ import {
   Menu,
   MenuItem,
   FormControlLabel,
+  Container,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +51,11 @@ const useStyles = makeStyles((theme) => ({
   UserMenu: {
     top: "60px !important",
   },
+  MainContainer:{
+    overflow:"hidden",
+    
+    
+  }
 }));
 const Explore = () => {
   const isLoggedIn = +localStorage.getItem("isLoggedIn");
@@ -83,7 +89,7 @@ const Explore = () => {
   return !isLoggedIn ? (
     <Redirect to="/explore" />
   ) : (
-    <>
+    <Box width={1} className={classes.MainContainer} pb={3}>
       <AppBar position="static">
         <Toolbar>
           <Box
@@ -157,7 +163,7 @@ const Explore = () => {
           <BreadCrumbs />
         </Grid>
       </Box>
-      <Grid container item justify="center" spacing={2} xs={12}>
+      <Grid container  justify="center"  spacing={3} >
         <Grid item container spacing={3} xs={12} md={isMapShowing ? 8 : 10}>
           {data
             .filter((item) => item.name.includes(searchState))
@@ -177,7 +183,7 @@ const Explore = () => {
           </Grid>
         ) : null}
       </Grid>
-    </>
+    </Box>
   );
 };
 
