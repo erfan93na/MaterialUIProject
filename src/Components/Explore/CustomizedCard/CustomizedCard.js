@@ -1,8 +1,4 @@
 import {
-  AppBar,
-  Toolbar,
-  Button,
-  InputBase,
   makeStyles,
   Grid,
   Box,
@@ -10,13 +6,15 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  Container,
 } from "@material-ui/core";
-import { AddBox, PinDrop, Search } from "@material-ui/icons";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import {  PinDrop } from "@material-ui/icons";
 import StarRateIcon from "@material-ui/icons/StarRate";
-import { useState } from "react";
 const useStyles = makeStyles((theme) => ({
+  root:{
+    "&:hover":{
+      boxShadow:theme.shadows[15]
+    }
+  },
   CardMapNotShowing: {
     paddingBottom: theme.spacing(2),
   },
@@ -33,8 +31,8 @@ const CustomizedCard = (props) => {
   const { gym, isMapShowing } = props;
   if (!isMapShowing) {
     return (
-      <Grid xs={12} md={6} lg={4}item>
-        <Card elevation={3}>
+      <Grid xs={12} md={6} lg={4}item >
+        <Card elevation={3}  classes={{root:classes.root}}>
           <CardMedia
             component="img"
             alt={gym.name}
@@ -67,7 +65,7 @@ const CustomizedCard = (props) => {
   } else {
     return (
       <Grid xs={12} item container>
-        <Box boxShadow={3} width={"100%"} display="flex">
+        <Box boxShadow={3} width={"100%"} display="flex"  classes={{root:classes.root}}>
           <Grid item xs={3}>
             {" "}
             <CardMedia
@@ -102,7 +100,7 @@ const CustomizedCard = (props) => {
                   <StarRateIcon />
                 </Box>
               </Box>
-              <Box item justify="center">
+              <Box  justify="center">
                 <Typography>{gym.district}</Typography>
                 <PinDrop />
               </Box>

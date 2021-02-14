@@ -12,4 +12,3 @@ primary:green
     },
 })
 
-console.log(theme)

@@ -10,13 +10,12 @@ import {
   Menu,
   MenuItem,FormControlLabel
 } from "@material-ui/core";
-import { PinDrop, Search } from "@material-ui/icons";
+import { Search } from "@material-ui/icons";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import StarRateIcon from "@material-ui/icons/StarRate";
 import Map from "../Map/Map";
 import { data } from "../../data";
 import { useState } from "react";
-import { useHistory, useRouteMatch, NavLink, Redirect, useLocation } from "react-router-dom";
+import { useHistory,  Redirect, useLocation } from "react-router-dom";
 import CustomizedCard from "./CustomizedCard/CustomizedCard";
 import BreadCrumbs from "./BreadCrumbs/BreadCrumbs";
 import { useEffect } from "react";
@@ -145,12 +144,12 @@ useEffect(()=>{
           <BreadCrumbs />
         </Grid>
       </Box>
-      <Grid container justify="center">
+      <Grid container justify="center" spacing={2}xs={12}>
         <Grid item container spacing={3} xs={12} md={isMapShowing ? 8 : 10}>
           {data
             .filter((item) => item.name.includes(searchState))
             .map((gym, index) => {
-              return <CustomizedCard gym={gym} isMapShowing={isMapShowing} />;
+              return <CustomizedCard key={index} gym={gym} isMapShowing={isMapShowing} />;
             })}
         </Grid>
         {isMapShowing ? (

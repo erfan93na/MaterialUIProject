@@ -1,12 +1,10 @@
 import {
-  useHistory,
-  useRouteMatch,
+ 
   NavLink,
   withRouter,
   useLocation,
 } from "react-router-dom";
-import { makeStyles, Box, withTheme } from "@material-ui/core";
-import { PlayCircleFilledWhite } from "@material-ui/icons";
+import { makeStyles, Box } from "@material-ui/core";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 const useStyles = makeStyles({
   linkActive: {
@@ -38,12 +36,12 @@ const BreadCrumbs = (props) => {
   const finalLinks = splittedURL.map((item, index) => {
     addedURL += "/" + item;
     return (
-      <>
+      <Box display="flex" flexDirection="row-reverse" alignItems="center" key={index}>
         <ArrowForwardIosIcon/>
-        <NavLink exact activeClassName={classes.linkActive} to={addedURL}>
+        <NavLink  exact activeClassName={classes.linkActive} to={addedURL}>
           {item}
         </NavLink>
-      </>
+      </Box>
     );
   });
   return (
