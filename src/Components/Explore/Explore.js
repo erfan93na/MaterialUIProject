@@ -3,6 +3,7 @@ import { useHistory, Redirect, useLocation } from "react-router-dom";
 import { Search } from "@material-ui/icons";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { data } from "../../data";
+import "./styles.css"
 import Map from "../Map/Map";
 import CustomizedCard from "./CustomizedCard/CustomizedCard";
 import BreadCrumbs from "./BreadCrumbs/BreadCrumbs";
@@ -55,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
     overflow:"hidden",
     
     
+  },
+  gridPadding:{
+    paddingRight:"20px"
   }
 }));
 const Explore = () => {
@@ -89,8 +93,8 @@ const Explore = () => {
   return !isLoggedIn ? (
     <Redirect to="/explore" />
   ) : (
-    <Box width={1} className={classes.MainContainer} pb={3}>
-      <AppBar position="static">
+    // <Box width={1} className={classes.MainContainer} pb={3}>
+    <>  <AppBar position="static" className="example">
         <Toolbar>
           <Box
             classes={{ root: classes.AppBarBox }}
@@ -163,8 +167,8 @@ const Explore = () => {
           <BreadCrumbs />
         </Grid>
       </Box>
-      <Grid container  justify="center"  spacing={3} >
-        <Grid item container spacing={3} xs={12} md={isMapShowing ? 8 : 10}>
+      <Grid container  justify="center"  >
+        <Grid className={classes.gridPadding} item container spacing={3} xs={12} md={isMapShowing ? 8 : 12}>
           {data
             .filter((item) => item.name.includes(searchState))
             .map((gym, index) => {
@@ -182,8 +186,8 @@ const Explore = () => {
             <Map />
           </Grid>
         ) : null}
-      </Grid>
-    </Box>
+      </Grid></>
+    // </Box>
   );
 };
 

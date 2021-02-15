@@ -15,15 +15,8 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: theme.shadows[15],
     },
   },
-  CardMapNotShowing: {
-    paddingBottom: theme.spacing(2),
-  },
-  CardMapShowing: {
-    padding: theme.spacing(2),
-  },
-  RateContainer: {
-    flexWrap: "nowrap",
-  },
+  mapIsShowing:{ maxHeight:"200px",
+  }
 }));
 const CustomizedCard = (props) => {
   const classes = useStyles();
@@ -69,7 +62,7 @@ const CustomizedCard = (props) => {
           boxShadow={3}
           width={"100%"}
           display="flex"
-          classes={{ root: classes.root }}
+          className={`${classes.root} ${classes.mapIsShowing}`}
         >
           <Grid item xs={3}>
             {" "}
