@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/erfan93na/MaterialUIProject/static/css/main.8c487a05.chunk.css",
-    "main.js": "/erfan93na/MaterialUIProject/static/js/main.659aafaa.chunk.js",
-    "main.js.map": "/erfan93na/MaterialUIProject/static/js/main.659aafaa.chunk.js.map",
+    "main.js": "/erfan93na/MaterialUIProject/static/js/main.28ecc36a.chunk.js",
+    "main.js.map": "/erfan93na/MaterialUIProject/static/js/main.28ecc36a.chunk.js.map",
     "runtime-main.js": "/erfan93na/MaterialUIProject/static/js/runtime-main.fde824d8.js",
     "runtime-main.js.map": "/erfan93na/MaterialUIProject/static/js/runtime-main.fde824d8.js.map",
     "static/js/2.2a6fb129.chunk.js": "/erfan93na/MaterialUIProject/static/js/2.2a6fb129.chunk.js",
@@ -24,6 +24,6 @@
     "static/js/runtime-main.fde824d8.js",
     "static/js/2.2a6fb129.chunk.js",
     "static/css/main.8c487a05.chunk.css",
-    "static/js/main.659aafaa.chunk.js"
+    "static/js/main.28ecc36a.chunk.js"
   ]
 }
